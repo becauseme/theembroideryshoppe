@@ -151,7 +151,7 @@ class Mage_Catalog_Block_Product_View_Options_Type_Select
                     'pricing_value' => $_value->getPrice(true)
                 ));
                 $selectHtml .= '<li>' .
-                               '<input type="'.$type.'" class="'.$class.' '.$require.' product-custom-option colrop" onclick="opConfig.reloadPrice()" name="options['.$_option->getId().']'.$arraySign.'" id="options_'.$_option->getId().'_'.$count.'" value="'.$_value->getOptionTypeId().'" data-id='.$imgf.' />' .
+                               '<input type="'.$type.'" class="'.$class.' '.$require.' product-custom-option colrop" name="options['.$_option->getId().']'.$arraySign.'" id="options_'.$_option->getId().'_'.$count.'" value="'.$_value->getOptionTypeId().'" data-id='.$imgf.' />' .
                                '<span class="label"><label for="options_'.$_option->getId().'_'.$count.'"><img src="'.Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$imgf.'.jpg" width="40px" >'.$_value->getTitle().'</label></span>';
                 if ($_option->getIsRequire()) {
                     $selectHtml .= '<script type="text/javascript">' .
