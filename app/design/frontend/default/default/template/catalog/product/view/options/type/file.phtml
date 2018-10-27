@@ -1,0 +1,177 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php $_option = $this->getOption() ?>
+
+										<div class="col-md-6 cll" > <div class="box_gray">				
+											<div class="logoclass">	
+												<div class="calign">
+												<h2  style="color: red;font-size: 25px;" >Add your Logo</h2>
+												<br />
+													 <a href="javascript: viewlogochart();"  ><span style="font-size: 16px;">View Logo Gallery</span></a>
+													</div>
+																<dt ><br>
+													<h3 class="bx_title">Select From Logo Gallery</h3>
+
+													</dt><dd>
+													Type Name:<input type="hidden" name="select_logo" class="select_logoc" value="" >
+														
+														
+
+<input type="text" size="24" name="select_logo_text" id="input_search_country" class="text search_txt" style="padding: 5px;width: 135px;">
+			<div style="margin-top:0px;" style="display:none;">
+				<div class="search_response"  id="input_search_all_response" style="display:none;"></div>
+			</div>
+													
+														</dd>
+												
+<dt><br><br><h3 class="bx_title"><?php echo  $this->htmlEscape($_option->getTitle()) ?><?php if ($_option->getIsRequire()): ?><span class="required">&nbsp;*</span><?php endif; ?></h3>
+    <?php echo $this->getFormatedPrice() ?></dt>
+<dd<?php if ($_option->decoratedIsLast){?> class="last"<?php }?>>
+<input type="file" id="option_<?php echo $_option->getId() ?>_file"  name="options_<?php echo $_option->getId() ?>_file" class="product-custom-option<?php echo $_option->getIsRequire() ? ' required-entry' : '' ?>" onchange="opConfig.reloadPrice()"/>
+
+<?php if ($_option->getFileExtension()): ?>
+<p class="no-margin"><?php echo Mage::helper('catalog')->__('Allowed file extensions to upload')?>: <strong><?php echo $_option->getFileExtension() ?></strong></p>
+<?php endif; ?>
+<?php if ($_option->getImageSizeX() > 0): ?>
+<p class="no-margin"><?php echo Mage::helper('catalog')->__('Maximum image width')?>: <strong><?php echo $_option->getImageSizeX() ?> <?php echo Mage::helper('catalog')->__('px.')?></strong></p>
+<?php endif; ?>
+<?php if ($_option->getImageSizeY() > 0): ?>
+<p class="no-margin"><?php echo Mage::helper('catalog')->__('Maximum image height')?>: <strong><?php echo $_option->getImageSizeY() ?> <?php echo Mage::helper('catalog')->__('px.')?></strong></p>
+<?php endif; ?>
+<p>New logo? Or you do not see your logo in our gallery? Simply upload your jpeg logo file with the item you are ordering and will appear on the site within 24 hours.</p>
+</dd>
+</div>
+
+<?php 
+//echo "This is for Custom option for newly added custom_info attribute";
+
+  $_product = $this->getProduct();
+    $attribute = $_product->getResource()->getAttribute('custom_info');
+    //echo "<pre>";
+    //print_r($attribute);
+    $attribute_value = $attribute ->getFrontend()->getValue($_product);
+    if ($attribute_value == 'Yes') {?>
+    	<div class="logoclass">	
+			<table><tr ><td colspan="2">
+			    <h3 class="bx_title">Contact Me To Discuss</h3> </td></tr>
+			    <tr><td><label>Name:</label></td><td><input type="text"  name="nametextOpt" value="" class="input-text"></td></tr>
+			    <tr><td><label>Phone:</label></td><td><input type="text"  name="phonetextOpt" value="" class="input-text"></td>
+			    </tr>
+			</table>
+			</div>
+		</div> 
+    <?php } ?>
+   
+   
+</div>
+
+
+</div>
+
+
+
+<script>
+function viewlogochart() {
+	window.open("<?php echo Mage::getBaseUrl(); ?>logo-chart/", "logochart",'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=800,height=400' );
+}
+
+
+</script>
+
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+	<script type="text/javascript">
+		jQuery.noConflict();
+	</script>
+	<script type="text/javascript" src="<?php echo $this->getSkinUrl(); ?>js/lib/jquery.watermarkinput.js"></script>	
+<script type="text/javascript" src="<?php echo $this->getSkinUrl(); ?>js/lib/autosuggest/bsn.AutoSuggest_2.1.3.js"></script>	
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl(); ?>js/lib/autosuggest/autosuggest_inquisitor.css" type="text/css" media="screen" charset="utf-8">
+	
+
+ 
+<!-- SearchBar CSS -->
+<style type='text/css'>		
+	.search_example {
+		margin:0px 20px 0px 10px;
+	}
+	.calign{
+		text-align: center;
+	}
+	
+	
+	
+	
+	.pink { background-color:#d91e4e; color:#FFFFFF; border-color:#d91e4e; }
+</style>
+<?php
+if($_SERVER['HTTP_HOST']=='localhost'){
+	$base_url="http://localhost/theembroideryshoppe/";
+}else{
+	$base_url="https://www.theembroideryshoppe.com/";
+}
+?>
+<script type="text/javascript">
+
+/** Init autosuggest on Search Input **/
+jQuery( document ).ready(function( $ ) {
+
+	
+	
+	//==================== Search With "Country" plugin =================================================	
+	// Set autosuggest options with all plugins activated
+	var options = {
+		script:"<?php echo $base_url;?>search_logo.php?&json=true&limit=8&",
+		varname:"input",
+		json:true,						// Returned response type
+		shownoresults:true,				// If disable, display nothing if no results
+		noresults:"No Results",			// String displayed when no results
+		maxresults:8,					// Max num results displayed
+		cache:false,					// To enable cache
+		minchars:2,						// Start AJAX request with at leat 2 chars
+		timeout:100000000,					// AutoHide in XX ms
+		callback: function (obj) { 		// Callback after click or selection
+			// For example use :
+						
+			// Build HTML
+			var html = "ID : " + obj.id + "<br>Main Text : " + obj.value ;
+			//alert(obj);
+			//$('#input_search_all_response').html(html).show() ;
+
+			$('.select_logoc').val(obj.value) ;
+			
+			// => TO submit form (general use)
+			//$('#search_country_value').val(obj.id); 
+			//$('#form_search_country').submit(); 
+		}
+	};
+	// Init autosuggest
+	var as_json = new bsn.AutoSuggest('input_search_country', options);
+	
+	// Display a little watermak	
+	$("#input_search_country").Watermark("ex : aisin , aim...");	
+});
+</script>

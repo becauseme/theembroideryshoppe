@@ -1,0 +1,240 @@
+<?php
+
+/**
+
+ * Magento
+
+ *
+
+ * NOTICE OF LICENSE
+
+ *
+
+ * This source file is subject to the Academic Free License (AFL 3.0)
+
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+
+ * It is also available through the world-wide-web at this URL:
+
+ * http://opensource.org/licenses/afl-3.0.php
+
+ * If you did not receive a copy of the license and are unable to
+
+ * obtain it through the world-wide-web, please send an email
+
+ * to license@magentocommerce.com so we can send you a copy immediately.
+
+ *
+
+ * DISCLAIMER
+
+ *
+
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+
+ * versions in the future. If you wish to customize Magento for your
+
+ * needs please refer to http://www.magentocommerce.com for more information.
+
+ *
+
+ * @category   design_default
+
+ * @package    Mage
+
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+
+ */
+
+?>
+
+
+
+<div class="header-top-container">
+
+    <div class="header-top" style="margin-bottom: -30px;">
+
+	
+
+	<table width="1000" border="0" cellpadding="0" cellspacing="0">
+
+  <tr>
+
+    <td align="left" valign="top" id="header_bg"><a href="index.php">
+
+	<a href="<?php echo $this->getUrl('') ?>" ><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" border="0" style="float:left" class="img-resize"/></a>	
+	
+	<img border="0" width="90" src="<?php echo $this->getSkinUrl('images/vosb.png') ?>" align="left" class="img-resize2">
+</td>
+
+	
+
+    <td align="left" valign="top" id="menu_bg">
+
+	<div class="head-menu">
+
+	<ul>
+
+	<li><a href="<?php echo $this->getUrl('logo-gallery/')?>">Logo Gallery</a></li>
+
+    <li><a href="<?php echo $this->getUrl('upload-logo')?>">Upload New Logo</a></li>
+
+	<li><a href="<?php echo $this->getUrl('about-us')?>" >By Phone or Fax </a></li>
+
+	<li> <a href="<?php echo $this->getUrl('customer/account')?>">Order Status </a></li>
+	<li> <a href="http://theembroideryshoppe.com/blog/">Blog</a></li>
+	
+
+	 <?php if ($this->helper('customer/data')->isLoggedIn()) { 
+
+					?>  
+
+	<li>Welcome<a href="<?php echo $this->getUrl('customer/account/logout')?>">Logout</a></li>
+
+		 <?php }else{ ?>
+
+	 <li><a href="<?php echo $this->getUrl('customer/account/login')?>">Customer Login</a></li>
+
+	  <?php } ?>
+	  <li><a href="<?php echo $this->getUrl('videogallery') ?>">Product Video</a></li>
+    </ul>
+
+
+
+	</div>
+
+	
+		<span style="float: right; margin-bottom:7px;">
+		<a style=" text-decoration:none;float:left;" target="_blank" href="https://www.youtube.com/channel/UCucuUgu5IpVqWtfGluphNTQ">
+         <img src="<?php echo $this->getSkinUrl('images/youtube.png') ?>" alt="The Embroidery Shoppe on Youtube" title="The Embroidery Shoppe on Youtube" align="absmiddle" locale="en">
+         </a>&nbsp;
+          <a target="_blank" href="https://www.instagram.com/teshoppe/ " style="margin-left:1px; text-decoration:none;float:left;"><img  align="absmiddle" alt="instagram" src="https://c866088.ssl.cf3.rackcdn.com/assets/instagram30x30.png">
+         </a>&nbsp;
+         <a target="_blank" href="http://twitter.com/teshoppe" style="text-decoration:none; float:left;"><img  align="absmiddle" alt="twitter" src="<?php echo $this->getSkinUrl('images/social_twitter.png') ?>">
+         </a>&nbsp;
+         <a target="_blank" href="http://www.facebook.com/teshoppe" style="text-decoration:none;float:left;"><img align="absmiddle" alt="Facebook" src="<?php echo $this->getSkinUrl('images/social_facebook.png') ?>">
+         </a>&nbsp;
+         <link  href="https://plus.google.com/+EmbroideryShoppe" rel="publisher" /><a href="https://plus.google.com/+EmbroideryShoppe" style="text-decoration:none;float:left;" target="_blank">
+         <img align="middle" src="<?php echo $this->getSkinUrl('images/social_google.png') ?>" alt=""/>
+         </a>
+         &nbsp;<a style="margin-left:1px; text-decoration:none;float:left;" target="_blank" href="http://www.linkedin.com/company/the-embroidery-shoppe?trk=fc_badge">
+         <img src="<?php echo $this->getSkinUrl('images/social_linkedin.png') ?>" alt="The Embroidery Shoppe on LinkedIn" align="absmiddle" locale="en">
+         </a><a href="#" class="textblack"><strong>800.705.0400</strong>&nbsp; M-F 9AM-5PM EST</a></span>
+    <div class="head-menu2">
+
+	<!--<div class="search">
+
+	<div><font color="#FFFFFF">Quick Search:</font></div>
+
+	
+
+    <div><form id="search_mini_form" action="<?php echo $this->helper('catalogSearch')->getResultUrl() ?>" method="get">
+
+	 <input id="search" type="text" size="18" style="padding:3px 2px;"  name="<?php echo $this->helper('catalogSearch')->getQueryParamName() ?>" value="<?php echo $this->helper('catalogSearch')->getEscapedQueryText() ?>" />
+
+            <div id="search_autocomplete" class="search-autocomplete"></div>
+
+            <script type="text/javascript">
+
+            //<![CDATA[
+
+                var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php echo $this->__('Search here...') ?>');
+
+                searchForm.initAutocomplete('<?php echo $this->helper('catalogSearch')->getSuggestUrl() ?>', 'search_autocomplete');
+
+            //]]>
+
+            </script>
+
+			 <input type="submit" value="GO"  name="Go" class="buttonstyle2" />
+
+			  </form></div>
+
+              
+
+	<div><font color="#fff"><a href="<?php echo $this->getUrl('catalogsearch/advanced/')?>" class="agraywhitebold">Advance Search</a></font> </div>
+
+	</div>-->
+
+	<div class="rit-menu">
+
+	 <a href="http://www.promoplace.com/teshoppe/" target="_blank" class="agraywhitebold"> <span style="float:left;padding: 18px 10px;">&bull;&nbsp;&nbsp;Search Promotional Goods</span></a>
+
+	 
+
+	<a href="<?php echo $this->getUrl('checkout/cart/')?>" class="agraywhitebold"><span style="float:left;padding: 18px 10px;">&bull;&nbsp;&nbsp;Shopping Cart</span></a>
+
+     <form action="<?php echo $this->getUrl('newsletter/subscriber/new') ?>" method="post" id="newsletter-validate-detail" style="float:right; width:150px;">
+
+ <span style="color: #FFFFFF;float: left;font-weight: bold;width: 100%;">Email Specials</span>
+
+    <input name="email" type="text" id="newsletter" style="border: medium none;left: right;margin:0px;padding: 5px;width: 135px;" />
+
+    <button type="submit" style="background: none repeat scroll 0 0 transparent;border: medium none;color: #FFFFFF;font-family: Verdana,Tahoma;font-size: 10px;font-weight: bold;margin-top: -6px;text-decoration: none;cursor: pointer;"><span>Sign Up</span></button>
+
+</form>
+
+	
+
+	</div>
+
+	
+
+	
+
+	</div>
+
+	
+
+	</td>
+
+  </tr>
+
+  <tr>
+
+    <td colspan="2" align="left" valign="middle">
+
+<?php
+
+include_once('includes/connect.php');  
+
+$ss= mysql_query("select * from banner");
+
+$ssData = mysql_fetch_array($ss); ?>
+
+    <div class="left-col"><img src="<?php echo $this->getSkinUrl('images/leftbannere.png') ?>" /></div>
+
+    <div class="right-col"><!--<a href="<?php //echo $this->getUrl('sale.html')?>">
+    
+    <img src="<?php //echo $this->getSkinUrl('images/fall-banner.png') ?>" />
+    
+    </a>-->
+    <a href="https://www.theembroideryshoppe.com/index.php/sale-1.html"><img src="https://www.theembroideryshoppe.com/media/<?php echo $ssData['filename']; ?>" /></a>
+    
+   <?php /*?> <a href="<?php echo $ssData['title'];  ?>"><img src="http://www.theembroideryshoppe.com/media/<?php echo $ssData['filename']; ?>" /></a><?php */?>
+   
+    </div>
+
+      
+
+    
+
+    </td>
+
+  </tr>
+
+ </table>
+
+	
+
+	
+
+      
+
+    </div>
+
+</div>
+
+<?php //echo $this->getChildHtml('topMenu') ?>

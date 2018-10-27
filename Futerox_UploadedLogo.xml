@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Futerox_UploadedLogo>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Futerox_UploadedLogo>
+    </modules>
+</config> 

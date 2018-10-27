@@ -1,0 +1,70 @@
+
+<table width="100%" border="0" cellpadding="0" cellspacing="2">
+<tr> <td align="center"   valign="top"> <div style="width:100%; float:left">
+<?php
+$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+//echo "select option_id from catalog_product_option where product_id='".$_GET['pid']."' AND type='drop_down' <br />";
+$read1=$write->query("select option_id from catalog_product_option where product_id='".$_GET['pid']."' AND type='drop_down'");
+while($row1 = $read1->fetch()){
+
+	$read2=$write->query("select option_id from catalog_product_option_title where option_id='".$row1['option_id']."' AND title='Select Color'");
+	$row2 = $read2->fetch();
+
+	$read3=$write->query("select  option_type_id from catalog_product_option_type_value where option_id='".$row2['option_id']."'");
+	while($row3 = $read3->fetch()) {
+	$i=1;
+	$readresult=$write->query("select title,option_type_id from catalog_product_option_type_title where option_type_id='".$row3['option_type_id']."'");
+	while($row4 = $readresult->fetch())
+		{
+		?>
+<div style="width:33%; float:left; height:220px">
+<div class="item" >
+<img src="<?php echo str_replace('index.php/','',Mage::getBaseUrl());  ?>media/<?php echo str_replace('/','',str_replace(' ','',$row4['title'])).'.jpg'; ?>" border="1"><span class="itemtext"> <?php echo $row4['title']; ?> </span>
+</div>
+</div>
+<?php }
+	}
+}
+
+
+?>							
+                                              
+       </div> </td>                      </tr>
+              <tr>
+                <td colspan="3" >&nbsp;</td>
+              </tr>
+              
+
+              
+              <!-- <tr>
+			  
+			  			  </tr>-->
+            </table>
+ <style>
+			
+			.item {
+     width: 150px;
+    height: 150px;    
+   
+   
+    margin: 10px;
+    text-align: center;
+    /*line-height: 135px;*/
+}
+			.item img {
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+}
+
+
+.newp{
+width:200px;; 
+
+}
+.itemtext{
+	margin-top: 0px;
+	float: center;
+}
+			</style>
+

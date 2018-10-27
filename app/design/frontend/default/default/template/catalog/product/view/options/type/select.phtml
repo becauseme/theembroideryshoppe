@@ -1,0 +1,178 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php /* @var $this Mage_Catalog_Block_Product_View_Options_Type_Select */ ?>
+
+
+
+<?php
+    $data = array();
+	$_product=$this->getProduct();
+
+ 		 $attributes = $_product->getAttributes();
+         foreach ($attributes as $attribute) {
+            //$attribute->getIsVisibleOnFront() && 
+            if ($attribute->getIsUserDefined()) {
+                $value = $attribute->getFrontend()->getValue($_product);
+                if (strlen($value) && $_product->hasData($attribute->getAttributeCode())) {
+                    $data[$attribute->getAttributeCode()] = array(
+                       'label' => $attribute->getFrontend()->getLabel(),
+                       'value' => $value//$product->getData($attribute->getAttributeCode())
+                    );
+                }
+            }
+        }
+        $attributes = $data;    unset($data);
+        $attribute_set = Mage::getModel('eav/entity_attribute_set')->load( $_product->getAttributeSetId() );
+	
+        if(isset($attribute_set->_data['attribute_set_id'])  && isset($attribute_set->_data['attribute_set_name']) && ($attribute_set->_data['attribute_set_id']==41 || $attribute_set->_data['attribute_set_name']=='Shirts T') && isset($attributes['gender']) ){
+            
+            switch( $attributes['gender']['value'] ){
+                case 'Mens':
+                    $page='men-size-chart';
+                    break;
+                case 'Womens':
+                    $page='women-size-chart';
+                    break;
+                case 'Youth':
+                    $page='youth-size-chart';
+                    break;
+                
+            }
+        }
+		
+		if(!isset($page))
+		{
+			$page='#';
+		}
+
+    ?> 
+
+
+
+<?php $_option = $this->getOption() ;
+//echo "<pre>";
+//print_r($_option->getTitle());
+//die();
+?>
+
+						<?php if($this->htmlEscape($_option->getTitle())=='Select Color') { ?>
+                      <div class="col-md-6 pull-right" ><div class="box_gray">
+                       <div class="prodnew_style">
+                       <h3 class="bx_title"><label><?php echo  $this->htmlEscape($_option->getTitle()) ?><?php if ($_option->getIsRequire()): ?><span class="required">&nbsp;*</span><?php endif; ?></label></h3>
+<dd<?php if ($_option->decoratedIsLast){?> class="last"<?php }?><?php if ($this->htmlEscape($_option->getTitle())=='Select Color'){?> class="colorBox colorBox_new"<?php }?>>
+		<?php 
+		//create new function by nitin for color list
+		echo $this->getRadioHtml() ?>
+                        <span id="colorAtt"></span>
+  	<a href="javascript: void(0)" onclick="viewcolorchart(<?php echo $_product->getId(); ?>)"; >View Color Chart</a> 
+								</div>
+                                </div>
+                                
+                                
+                                 </div>
+								<?php } ?>
+                               
+                                
+                                <?php
+                                if($this->htmlEscape($_option->getTitle())=='Select Size')  {
+								 ?>
+                                  <div class="col-md-6"><div class="box_gray">
+                                 <h3 class="bx_title"><label><?php echo  $this->htmlEscape($_option->getTitle()) ?><?php if ($_option->getIsRequire()): ?><span class="required">&nbsp;*</span><?php endif; ?></label></h3>
+                                 
+   
+
+		<?php echo $this->getSizeHtml() ?>
+								<a href="javascript: void(0)" onclick="javascript: viewchart('<?php echo $page; ?>');" >View Size Chart</a> 
+								   </div>
+                                 
+                                 
+                                 </div>
+								<?php }  ?>
+                              
+    <?php if ($_option->getIsRequire()): ?>
+        <?php if ($_option->getType() == Mage_Catalog_Model_Product_Option::OPTION_TYPE_RADIO || $_option->getType() == Mage_Catalog_Model_Product_Option::OPTION_TYPE_CHECKBOX): ?>
+            <span id="options-<?php echo $_option->getId() ?>-container"></span>
+        <?php endif; ?>
+    <?php endif;?>
+
+<script>
+function viewchart(pro) {
+	window.open('<?php echo Mage::getBaseUrl();   ?>'+pro+'/','Window','toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=800,height=400');
+}
+function viewcolorchart(proid) {
+	window.open("<?php echo Mage::getBaseUrl(); ?>colorchart/?pid="+proid+"/", "colorchart",'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=800,height=400' );
+}
+</script>
+<style>/*
+.prodnew_style{
+padding: 10px 15px 20px;
+    background-color: #cccccc;
+    border: 1px solid #e4e4e4;
+    width: 330px;
+    margin-left: 398px;
+    margin-top: -173px;
+	position:relative;
+	
+}
+.sizelabel{
+	text-align:left;
+	}
+.options-list12{
+	width:398px;	
+	position: relative;
+	
+		}
+		.options-list12 li
+{
+   background-color: #cccccc;
+    border: 1px solid #e4e4e4;
+	
+	display: inline-table;
+    padding: 10px;
+	width:72px;
+	height:72px;
+}
+	.sizep .price-notice
+{
+  
+	display:flex;
+	padding:0px !important; 
+	padding-left:0px !important;
+}
+.logoclass{
+
+    background-color: #cccccc;
+    border: 1px solid #e4e4e4;
+    width: 330px;
+	padding:5px;
+    
+    margin-top: -36px;
+	position:relative;
+}
+
+	*/
+</style>

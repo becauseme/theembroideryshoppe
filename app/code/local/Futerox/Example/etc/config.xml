@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+<modules>
+<Futerox_Example>
+<version>0.1.0</version>
+</Futerox_Example>
+</modules>
+<global>
+<blocks>
+<Futerox_Example>
+<class>Futerox_Example_Block</class>
+</Futerox_Example>
+</blocks>
+</global>
+</config>

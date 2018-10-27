@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Spranks_Packingslip>
+            <version>0.1.3</version>
+        </Spranks_Packingslip>
+    </modules>
+
+    <global>
+        <blocks>
+	    	<adminhtml>
+	    		<rewrite>
+	    			<sales_order_view>Spranks_Packingslip_Block_Sales_Order_View</sales_order_view>
+					<sales_order_grid>Spranks_Packingslip_Block_Grid</sales_order_grid>
+	    		</rewrite>
+	    	</adminhtml>
+    	</blocks>
+        <rewrite>
+            <Spranks_Packingslip_OrderController>
+                <from><![CDATA[#/\w+/sales_order/print/#]]></from>
+                <to>/orderprint/order/print/</to>
+            </Spranks_Packingslip_OrderController>
+			<Spranks_Packingslip_Adminhtml_Sales_Order>
+				<from><![CDATA[#/\w+/sales_order/pdforders/#]]></from>
+				<to>/orderprint/order/pdforders/</to>
+			</Spranks_Packingslip_Adminhtml_Sales_Order>
+        </rewrite>
+        <models>
+            <Spranks_Packingslip>
+                <class>Spranks_Packingslip_Model</class>
+            </Spranks_Packingslip>
+        </models>
+        <pdf>
+        	<order>
+        		<default>Spranks_Packingslip/order_pdf_items_order_default</default>
+                <grouped>Spranks_Packingslip/order_pdf_items_order_grouped</grouped>
+        	</order>
+        </pdf>
+    </global>
+	<admin>
+        <routers>
+            <Spranks_Packingslip>
+                 <use>admin</use>
+                <args>
+                    <module>Spranks_Packingslip</module>
+                    <!-- This is used when "catching" the rewrite above -->
+                    <frontName>orderprint</frontName>
+                </args>
+            </Spranks_Packingslip>
+        </routers>
+    </admin>
+</config>

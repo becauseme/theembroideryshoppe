@@ -1,0 +1,170 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+    <td align="left">&nbsp;</td>
+  </tr>
+  <!--<tr> 
+          <td align="left"  style="padding:0px"> <form action="<?php echo $this->getUrl('newsletter/subscriber/new') ?>" method="post" id="newsletter-validate-detail">
+              <table width="80%" border="0" cellpadding="3" cellspacing="0" class="allbdrred">
+               
+                <tr> 
+                  <td bgcolor="#8A3D2B"><font color="#FFFFFF"><strong>&nbsp;Email 
+                    Special</strong></font></td>
+                </tr>
+                <tr> 
+                  <td>&nbsp;</td>
+                </tr>
+                
+                <tr> 
+                  <td style="padding-left:3px;">Email address:</td>
+                </tr>
+                <tr> 
+                  <td style="padding-left:3px;">  <input name="email" type="text" id="newsletter" class="required-entry validate-email input-text" size="23" /></td>
+                </tr>
+                <tr> 
+                  <td style="padding-left:3px;"> 
+				   <button type="submit" class="buttonstyle1"><span><?php echo $this->__('Sign up') ?></span></button>
+            <?php if( $message = $this->getErrorMessage() ): ?>
+                <p class="error"><?php echo $message ?></p>
+            <?php endif; ?>
+            <?php if( $message = $this->getSuccessMessage() ): ?>
+                <p class="success"><?php echo $message ?></p>
+            <?php endif; ?>
+				                 </td>
+                </tr>
+                <tr> 
+                  <td style="padding-left:3px;">Receive new product &amp; Sales Updates</td>
+                </tr>
+              </table>
+            </form>
+			<script type="text/javascript">
+//<![CDATA[
+    var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+//]]>
+</script>
+			</td>
+        </tr>-->
+             
+     <tr> 
+          <td align="center"  style="padding:0px">
+         
+          
+           <form id="search_mini_form" action="<?php echo $this->helper('catalogSearch')->getResultUrl() ?>" method="get">
+           
+           
+              <div class="search-back"><input id="search" class="search-margin" type="text" size="18" name="<?php echo $this->helper('catalogSearch')->getQueryParamName() ?>" value="<?php echo $this->helper('catalogSearch')->getEscapedQueryText() ?>" />
+            <div id="search_autocomplete" class="search-autocomplete"></div>
+            <script type="text/javascript">
+            //<![CDATA[
+                var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php echo $this->__('Search here...') ?>');
+                searchForm.initAutocomplete('<?php echo $this->helper('catalogSearch')->getSuggestUrl() ?>', 'search_autocomplete');
+            //]]>
+            </script>
+			 <input type="submit" value="GO"  name="Go" class="buttonstyle2"  style="background: none repeat scroll 0 0 transparent;
+    float: right;
+    margin-right: 35px;
+    margin-top: 57px;"/></div>
+            </form>
+            
+            
+			<script type="text/javascript">
+//<![CDATA[
+    var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+//]]>
+</script>
+
+			</td>
+        </tr>     
+  <tr>
+    <td align="left">&nbsp;</td>
+  </tr>
+<tr>
+    <td align="left" style="line-height:21px;" >
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+    <td id="nav3head">Categories</td>
+  </tr>
+  <tr>
+    <td>
+    <table cellspacing="0" cellpadding="0" border="0" class="nav3" id="nav3bar">
+	<tbody>
+    
+<?php
+$layer = Mage::getSingleton('catalog/layer');
+$_category = $layer->getCurrentCategory();
+$currentCategoryId= $_category->getId();
+?>
+<?php $_helper = Mage::helper('catalog/category') ?>
+<?php $_categories = $_helper->getStoreCategories() ?>
+<?php $currentCategory = Mage::registry('current_category') ?>
+<?php if (count($_categories) > 0): ?>
+<?php foreach($_categories as $_category): ?>
+<?php $_category = Mage::getModel('catalog/category')->load($_category->getId()) ?>
+<tr><td>
+<ul>
+    <?php $_category = Mage::getModel('catalog/category')->load($_category->getId()) ?>
+    <li>
+        <a href="<?php echo $_helper->getCategoryUrl($_category) ?>"><span><?php echo $_category->getName(); ?></span></a>
+        <ul>
+                <?php $_subcategories = $_category->getChildrenCategories() ?>
+                <?php if (count($_subcategories) > 0): ?>
+                <?php $subcat=0?>
+                <?php foreach($_subcategories as $_subcategory): ?>
+                <li>
+                    <a href="<?php echo $_helper->getCategoryUrl($_subcategory) ?>">
+                    <?php echo $_subcategory->getName() ?></a>
+                    <?php $_subsubcategories = $_subcategory->getChildrenCategories() ?>
+                    <ul>
+                        <?php if (count($_subsubcategories) > 0): // Getting no.of sub-sub categories count ?>
+                        <li>
+                            <?php foreach($_subsubcategories as $_subsubcategory): ?>
+                            <a href="<?php echo $_helper->getCategoryUrl($_subsubcategory) ?>">
+                            <?php echo $_subsubcategory->getName() ?></a>
+                            <?php endforeach; ?>
+                        </li>
+                        <?php endif; ?>
+                        
+                        <!– End of sub-sub-category –>
+                    
+                    </ul>
+                </li>
+                <?php
+                $subcat++;
+                
+                ?>
+                <?php endforeach; ?>
+                
+                <?php endif; ?>
+        </ul>
+    </li>
+</ul>
+</td>
+</tr>
+<?php endforeach; ?>
+
+<?php endif; ?>
+
+
+   
+   
+	</tbody></table></td>
+  </tr>
+</tbody></table>
+    		</td>
+    
+  </tr>
+  
+  
+ <?php /* ?> <tr>
+    <td align="left" style="padding:0px" ><br /><br /><a href="http://www.promoplace.com/teshoppe/" target="_blank"><img src="<?php echo $this->getSkinUrl('images/small_banner1.gif') ?>" width="131" height="178" border="0"></a></td>
+  </tr>
+  <tr>
+    <td align="left"  style="padding:0px" ><br /><br /><a href=" http://teshoppe.gigabitprint.com" target="_blank"><img src="<?php echo $this->getSkinUrl('images/d2p_banner_2.png') ?>" width="132" height="179" border="0"></a></td>
+  </tr>
+  <tr>
+    <td align="left"  style="padding:0px" ><br /><br /><a href=" http://www.promoplace.com/teshoppe/" target="_blank"><img src="<?php echo $this->getSkinUrl('images/Promotional_banner_piclgr.png') ?>" width="131" height="179" border="0"></a></td>
+  </tr>
+  <?php */?>
+  
+  
+   
+</table>

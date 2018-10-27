@@ -1,0 +1,10 @@
+<?php
+
+class Futerox_UploadedLogo_Model_Mysql4_UploadedLogo_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract
+{
+    public function _construct()
+    {
+        parent::_construct();
+        $this->_init('uploadedlogo/uploadedlogo');
+    }
+}

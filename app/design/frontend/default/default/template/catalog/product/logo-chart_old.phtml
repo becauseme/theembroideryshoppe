@@ -1,0 +1,28 @@
+<?php
+$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+$readresult=$write->query("select * from uploadlogo where status='1' order by title ASC");
+
+?>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="2">
+<tr> <td align="center"   valign="top"> <div style="width:100%; float:left">
+<?php
+$i=1;
+while($row = $readresult->fetch()){
+?>
+<div style="width:25%; float:left; height:220px">
+<img src="<?php echo str_replace('index.php/','',Mage::getBaseUrl());   ?>media/<?php echo $row['filename']; ?>" border="0"><br> <?php echo $row['title']; ?> 
+</div>
+<?php } ?>								
+                                              
+       </div> </td>                      </tr>
+              <tr>
+                <td colspan="3" >&nbsp;</td>
+              </tr>
+              
+
+              
+              <!-- <tr>
+			  
+			  			  </tr>-->
+            </table>

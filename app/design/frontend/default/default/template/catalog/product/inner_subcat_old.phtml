@@ -1,0 +1,43 @@
+
+<?php  $child_cat = $this->getSubcatProduct(); ?>
+<?php  $_collectionSize = count($child_cat) ?>
+<?php
+$pp=Mage::getBaseUrl();
+$path=str_replace('/index.php/','',$pp);
+?>
+
+
+ 
+    
+       <?php $k=0; foreach ($child_cat as $_childCategory):?>
+ <?php if($k==0) { echo '<div style="width: 700px;">'; }  ?>
+ <?php $k++;  ?>
+    <div style="width:200px; float:left">
+      <a href="<?php echo $_childCategory->getUrl();?>">
+	  <?php
+	  list($width, $height, $type, $attr) = getimagesize('media/catalog/category/'.$_childCategory->image);
+if($width > '200')
+	{
+		$width='200';
+	}
+if($height > '110')
+	{
+		$height='110';
+	}	
+?> 
+<img src="<?php echo str_replace('index.php/','',Mage::getBaseUrl());   ?>media/catalog/category/<?php echo $_childCategory->image; ?>" border="0" width="<?php echo $width; ?>" height="<?php echo $height; ?>">
+	
+	   
+	  </a>
+        <p style="padding:8px 0 7px 0;" align="center"><a href="<?php echo $_childCategory->getUrl();?> "> <?php echo $_childCategory->getName(); ?></a></p>
+</div>
+     <?php if($k==3) { echo "</div>"; $k=0; }  ?>
+  
+<?php endforeach ?>
+	<?php //if($i<6) {  echo "</ul></div>"; } ?>
+     <?php if(($k<3 && $k!=0) ) { echo "</div>"; }  ?>
+ 
+
+   
+
+

@@ -1,0 +1,94 @@
+<style>
+.mid_part{ width:100%; float:left; padding-top:16px;}
+.mid_part_top{ width:100%; float:left; background:url(<?=$this->getSkinUrl('images/b_top.jpg');?>) left bottom no-repeat; height:6px;}
+.mid_part_mid{ width:100%; float:left; background:url(<?=$this->getSkinUrl('images/b_mid.jpg');?>) left top  repeat-y;}
+.mid_part_bot{ width:100%; float:left; background:url(<?=$this->getSkinUrl('images/b_bot.jpg');?>) left top no-repeat; height:6px;}
+.mid_part_inner{ width:952px; float:left;margin:20px 24px 20px 24px; }
+.mid_part_in{ float:left; width:100%;background:url(<?=$this->getSkinUrl('images/border.jpg');?>) left bottom repeat-x; padding-bottom:30px;}
+
+.mid_part_left{ width:438px; float:left;}
+.mid_part_left a{ float:left; padding-top:15px;}
+.mid_part_right{ width:438px; float:right;}
+.mid_part_right a{ float:left; padding-top:15px;}
+
+.shaydow{ float:left; width:100%;background: url(<?=$this->getSkinUrl('images/shadow.jpg');?>)left top repeat-x; display:block; margin-top:1px;}
+.devedeal {
+    margin: 0 auto;
+    width: 69%; margin-top:25px; text-align: center;}
+</style>
+<?php if(isset($_POST['VS']) &&  $_POST['VS']!='')
+{
+$vs = $_POST['VS'];
+}else
+{
+$vs = '6';
+}
+
+?>
+<div class="devedeal">
+<img width="160" height="" border="0" src="<?php echo $this->getSkinUrl('images/vedios.png') ?>">
+</div>
+<div class="mid_part">
+<div class="mid_part_top">&nbsp;</div>
+<div class="mid_part_mid">
+        <div class="mid_part_inner">
+		<table cellspacing="0" class="pager" style="width:100%; margin-bottom:15px;">
+        <tbody><tr>
+            <td>
+                            <strong>Videos</strong>
+                        </td>
+                        <td class="a-right">
+						<form name="videoshow" action="" method="post">
+                Show <select onchange="showVideo(this.value)" name="VS">
+                                    <option value="6" <?php if($vs==6){ ?> selected="selected" <?php } ?>>6</option>
+                                    <option value="10" <?php if($vs==10){ ?> selected="selected" <?php } ?>>10</option>
+                                    <option value="20" <?php if($vs==20){ ?> selected="selected" <?php } ?>>20</option>
+									<option value="30" <?php if($vs==30){ ?> selected="selected" <?php } ?>>30</option>
+									<option value="50" <?php if($vs==50){ ?> selected="selected" <?php } ?>>50</option>
+                                    <option value="0" <?php if($vs==0){ ?> selected="selected" <?php } ?>>All</option>
+                      </select>
+					  </form> per page            </td>        </tr>
+    </tbody></table>
+		
+		 
+     <div class="mid_part_in">
+	 
+<?php $i = 0;
+$collection = Mage::getModel('videogallery/videogallery')->getCollection();
+$collection->setPageSize($vs);
+//$collection->setCurPage(2);
+$size = $collection->getSize();
+$cnt = count($collection);
+foreach ($collection as $item) { 
+	$i = $i+1;
+	
+	if($i%2==0)
+	{
+	$class1= "mid_part_right";
+	}else
+	{
+	$class1= "mid_part_left";
+	}
+	
+?>
+ <div class="<?php echo $class1;?>">
+                <h2><?php echo $item->getTitle(); ?></h2>
+                <p><?php echo $item->getDescription();?></p>
+                <a href="#"><?php echo $item->getContent();?></a>
+                </div>
+<?php 	
+}
+//print_r($collection->walk('save'));
+?></div>
+
+</div>
+</div>
+<div class="mid_part_bot">&nbsp;</div>
+<div class="shaydow">&nbsp;</div>
+</div>
+<script>
+function showVideo()
+{
+document.videoshow.submit();
+}
+</script>

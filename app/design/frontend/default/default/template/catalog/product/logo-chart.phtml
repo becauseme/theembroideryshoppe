@@ -1,0 +1,72 @@
+<?php
+$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+$readresult=$write->query("select * from uploadlogo where status='1' order by title ASC");
+
+?>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="2">
+<tr> <td align="center"   valign="top"> <div style="width:100%; float:left">
+<?php
+$i=1;
+$mediaUrl=Mage::getBaseUrl('media');
+while($row = $readresult->fetch()){
+$width='100';
+$height='100';
+if(!empty($row['filename']))
+{
+	 if(file_exists($mediaUrl.$row['filename']))
+	 {
+		list($width, $height, $type, $attr) = getimagesize("media/".$row['filename']);
+		if($width > '200')
+			{
+				$width='200';
+			}
+		if($height > '110')
+			{
+				$height='110';
+			}	
+	  }
+}
+  
+?>
+<div style="width:33%; float:left; height:220px">
+<div class="item" >
+<img src="<?php echo str_replace('index.php/','',Mage::getBaseUrl());   ?>media/<?php echo $row['filename']; ?>" border="0" ><br> <?php echo $row['title']; ?> 
+</div>
+</div>
+<?php } ?>								
+                                              
+       </div> </td>                      </tr>
+              <tr>
+                <td colspan="3" >&nbsp;</td>
+              </tr>
+              
+
+              
+              <!-- <tr>
+			  
+			  			  </tr>-->
+            </table>
+ <style>
+			
+			.item {
+     width: 150px;
+    height: 150px;    
+   
+   
+    margin: 10px;
+    text-align: center;
+    line-height: 135px;
+}
+			.item img {
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+}
+
+
+.newp{
+width:200px;; 
+
+}
+			</style>

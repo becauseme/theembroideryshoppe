@@ -1,0 +1,182 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+  <tr> 
+    <td width="196" valign="bottom" height="33" background="<?php echo $this->getSkinUrl('images/leftnav-bg_12.gif') ?>"><img src="<?php echo $this->getSkinUrl('images/left-nav-topimg_09.jpg') ?>" width="196" height="33">&nbsp;</td>
+  </tr>
+ 
+    <td align="left" background="<?php echo $this->getSkinUrl('images/leftnav-bg_12.gif') ?>" style="padding-left:26px; line-height:28px;" >
+<ul>
+  <?php
+
+$obj = new Mage_Catalog_Block_Navigation();
+$store_cats = $obj -> getStoreCategories();
+$current_cat = $obj->getCurrentCategory();
+
+foreach ($store_cats as $cat) {
+
+if ($cat->getName()==$_SESSION['bread']['1'] ) {
+
+echo '<li class="current1"><a href="'.$this->getCategoryUrl($cat).'">'.$cat->getName()."</a>\n<ul>\n"; 
+
+if($cat->getId()==$_SESSION['breadid']['1']){
+
+ $loadCategory = Mage::getModel('catalog/category')->load($_SESSION['breadid']['1']);
+ $subCategories = explode(',', $loadCategory->getChildren());
+
+    foreach ( $subCategories as $subCategoryId )
+    {
+        $__cat = Mage::getModel('catalog/category')->load($subCategoryId);
+		
+        if($__cat->getIsActive())
+        {?>
+		<li><a href="<?php echo $__cat->getURL()?>">&raquo;<?php echo $__cat->getName();?></a></li>
+       <?php 
+	  if(isset($_SESSION['breadid']['2'])){
+			$sub_loadCategory = Mage::getModel('catalog/category')->load($_SESSION['breadid']['2']);	
+			$sub_subCategories = explode(',', $sub_loadCategory->getChildren());	
+				if(count($sub_subCategories)>0 and $__cat->getId()==$_SESSION['breadid']['2'])
+				foreach ( $sub_subCategories as $sub_subCategoryId )
+				{
+					$sub___cat = Mage::getModel('catalog/category')->load($sub_subCategoryId);
+
+					if($sub___cat->getIsActive())
+					{?>
+					<li><a href="<?php echo $sub___cat->getURL()?>">&raquo;&raquo;<?php echo $sub___cat->getName();?></a></li>
+					   <?php 
+						   if(isset($_SESSION['breadid']['3'])){
+								$sub_sub_loadCategory = Mage::getModel('catalog/category')->load($_SESSION['breadid']['3']);	
+								$sub_sub_subCategories = explode(',', $sub_sub_loadCategory->getChildren());	
+								if(count($sub_sub_subCategories)>0 and $sub___cat->getId()==$_SESSION['breadid']['3'])
+								foreach ( $sub_sub_subCategories as $sub_sub_subCategoryId )
+								{
+									$sub_sub___cat = Mage::getModel('catalog/category')->load($sub_sub_subCategoryId);
+
+									if($sub_sub___cat->getIsActive())
+									{?>
+									<li><a href="<?php echo $sub_sub___cat->getURL()?>">&raquo;&raquo;&raquo;<?php echo $sub_sub___cat->getName();?></a></li><?php
+									}
+								}
+							}
+					
+					}
+				}
+			}
+		}
+    }
+	}else{
+			foreach ($obj->getCurrentChildCategories() as $subcat) {
+			echo '<li><a href="'.$this->getCategoryUrl($subcat).'">'.'&raquo;'.$subcat->getName()."</a></li>\n";
+			}
+		}
+	
+echo "</ul>\n</li>\n";
+} else {
+echo '<li><a href="'.$this->getCategoryUrl($cat).'">'.$cat->getName()."</a></li>\n";
+}
+}
+$_SESSION['bread']=NULL;
+$_SESSION['breadid']=NULL;
+?>
+</ul> 
+<?php /*?>   
+<ul>
+<?php
+$obj = new Mage_Catalog_Block_Navigation();
+$store_cats = $obj -> getStoreCategories();
+$current_cat = $obj->getCurrentCategory();
+
+$parentCategory = Mage::getModel('catalog/category')->load($current_cat->getParentId());
+//echo $parentCategory->getName()."<br/>".$current_cat->getName()."<br/>".$current_cat->getParentId();
+$p_id=$current_cat->getParentId();
+$current_cat = (is_object($current_cat) ? $current_cat->getName() : '');
+
+foreach ($store_cats as $cat) {
+if (($cat->getName() == $current_cat) or ($cat->getName()==$parentCategory->getName())) { 
+echo '<li class="current1"><img src="'.$this->getSkinUrl('images/left-nav-arrow.gif').'" width="9" height="5"><a href="'.$this->getCategoryUrl($cat).'" style="padding-left:15px;">'.$cat->getName()."</a>\n<ul>\n";
+
+if($cat->getName()==$parentCategory->getName()){
+
+ $loadCategory = Mage::getModel('catalog/category')->load($p_id);
+
+$subCategories = explode(',', $loadCategory->getChildren());
+
+    foreach ( $subCategories as $subCategoryId )
+    {
+        $__cat = Mage::getModel('catalog/category')->load($subCategoryId);
+
+        if($__cat->getIsActive())
+        {?>
+<li style="padding-left:5px;"><a href="<?=$__cat->getURL()?>"  style="padding-left:15px;<?php if($__cat->getName()==$current_cat)echo 'font-weight:bold;';?>">&raquo;<?=$__cat->getName()?></a></li>
+       <?php     
+        }
+    }
+
+    
+	}else{
+		foreach ($obj->getCurrentChildCategories() as $subcat) {
+		echo '<li style="padding-left:5px;"><a href="'.$this->getCategoryUrl($subcat).'" style="padding-left:15px;">&raquo;'.$subcat->getName()."</a></li>\n";
+		}
+	}
+echo "</ul>\n</li>\n";
+} else {
+echo '<li><img src="'.$this->getSkinUrl('images/left-nav-arrow.gif').'" width="9" height="5"><a href="'.$this->getCategoryUrl($cat).'" style="padding-left:15px;">'.$cat->getName()."</a></li>\n";
+}
+}
+?>
+    </ul>
+	
+    <?php */?>
+     </td>
+  </tr>
+ <tr> 
+          <td align="left" background="<?php echo $this->getSkinUrl('images/leftnav-bg_12.gif') ?>" style="padding:0 0 0 21px"> <form action="<?php echo $this->getUrl('newsletter/subscriber/new') ?>" method="post" id="newsletter-validate-detail">
+              <table width="59%" border="0" cellpadding="3" cellspacing="0" class="allbdrred">
+               
+                <tr> 
+                  <td bgcolor="#8A3D2B"><font color="#FFFFFF"><strong>&nbsp;Email 
+                    Special</strong></font></td>
+                </tr>
+                <tr> 
+                  <td>&nbsp;</td>
+                </tr>
+                
+                <tr> 
+                  <td style="padding-left:3px;">Email address:</td>
+                </tr>
+                <tr> 
+                  <td style="padding-left:3px;">  <input name="email" type="text" id="newsletter" class="required-entry validate-email input-text" size="23" /></td>
+                </tr>
+                <tr> 
+                  <td style="padding-left:3px;"> 
+				   <button type="submit" class="buttonstyle1"><span><?php echo $this->__('Sign up') ?></span></button>
+            <?php if( $message = $this->getErrorMessage() ): ?>
+                <p class="error"><?php echo $message ?></p>
+            <?php endif; ?>
+            <?php if( $message = $this->getSuccessMessage() ): ?>
+                <p class="success"><?php echo $message ?></p>
+            <?php endif; ?>
+				                 </td>
+                </tr>
+                <tr> 
+                  <td style="padding-left:3px;">Receive new product &amp; Sales Updates</td>
+                </tr>
+              </table>
+            </form>
+			<script type="text/javascript">
+//<![CDATA[
+    var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+//]]>
+</script>
+			</td>
+        </tr> 
+ <?php /*?> <tr>
+    <td align="left" background="<?php echo $this->getSkinUrl('images/leftnav-bg_12.gif') ?>" style="padding:0 0 0 40px" ><br /><br /><a href="http://www.promoplace.com/teshoppe/" target="_blank"><img src="<?php echo $this->getSkinUrl('images/small_banner1.gif') ?>" width="131" height="178" border="0"></a></td>
+  </tr><?php */?>
+  <tr>
+    <td align="left" background="<?php echo $this->getSkinUrl('images/leftnav-bg_12.gif') ?>" style="padding:0 0 0 40px" ><br /><br /><a href=" http://teshoppe.gigabitprint.com" target="_blank"><img src="<?php echo $this->getSkinUrl('images/d2p_banner_2.png') ?>" width="132" height="179" border="0"></a></td>
+  </tr>
+  <tr>
+    <td align="left" background="<?php echo $this->getSkinUrl('images/leftnav-bg_12.gif') ?>" style="padding:0 0 0 40px" ><br /><br /><a href=" http://www.promoplace.com/teshoppe/" target="_blank"><img src="<?php echo $this->getSkinUrl('images/Promotional_banner_piclgr.png') ?>" width="131" height="179" border="0"></a></td>
+  </tr>
+  
+   
+</table>

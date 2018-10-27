@@ -1,0 +1,50 @@
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      
+	    <tr> 
+          <td height="8"></td>
+        </tr>
+       
+        <tr> 
+          <td valign="top"><table width="100%" border="0" cellpadding="0" cellspacing="2">
+<?php $special_products = $this->getSpecialProducts(); ?>
+<?php //shuffle($featured_products); ?>
+<?php $_collectionSize = count($special_products); ?>
+<?php $i=0; foreach ($special_products as $_res): ?>
+<?php $_product = Mage::getModel('catalog/product')->load($_res['product_id']); ?>
+<?php if ($i++%3==0): ?>
+			<tr> 
+	<?php endif ?>			
+             
+		          <td align="center" width="33%"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>">
+		 <img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail')->resize(120, 120); ?>" width="120" height="120" alt="<?php echo $this->htmlEscape($_product->getName()) ?>" />		 
+
+</a>
+                  <BR>
+                 <a class="agrayred" href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_product->getName()) ?>)"><?php echo $_product->getData('sku'); ?> <?php echo substr($this->htmlEscape($_product->getName()),0,30); ?></a><BR>
+				  Price: <?php echo Mage::helper('core')->currency(number_format($_product->getFinalPrice(),2));?>	</td>
+                  <?php if($i%3==0 && $i!=$_collectionSize): ?>
+</tr>
+
+<?php endif ?>
+<?php endforeach ?>
+<?php for($i;$i%3!=0;$i++): ?>
+
+<?php endfor ?>
+
+<?php if ($i%3==0): ?>
+
+<?php endif ?>
+		
+<script type="text/javascript">decorateTable('product-list-table')</script>
+					 
+				
+				
+                  </table></td>
+                
+              </tr>
+              
+            </table>
+            
+			</td>
+        </tr>
+      </table>  

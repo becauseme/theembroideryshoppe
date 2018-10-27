@@ -1,0 +1,254 @@
+<?php
+$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+?>
+<?php
+
+if(isset($_POST['contactname']))
+{
+			$filename = $_FILES['logo']['name'];
+		/*	$temporary_name = $_FILES['logo']['tmp_name']; 
+			$mimetype = $_FILES['logo']['type']; 
+			$filesize = $_FILES['logo']['size'];
+	
+	if($filename!="")
+	{
+	switch($mimetype)
+	{ 
+	//case "image/jpg": 
+	case "image/jpg": 
+	case "image/jpeg": 
+	case "image/pjpeg": //IE's weird jpeg MIME type 
+	$i = imagecreatefromjpeg($temporary_name); 
+	break; 
+	case "image/gif": 
+	$i = imagecreatefromgif($temporary_name); 
+	break; 
+	}	
+	//Delete the uploaded file 
+	unlink($temporary_name);
+	$dest_x =300; 
+	$dest_y =150;
+	//Is the original bigger than the thumbnail dimensions? 
+	if (imagesx($i) > $dest_x or imagesy($i) > $dest_y) { 
+	//Is the width of the original bigger than the height? 
+	if (imagesx($i) >= imagesy($i)) { 
+	$thumb_x = $dest_x; 
+	$thumb_y = imagesy($i)*($dest_x/imagesx($i)); 
+	} else { 
+	$thumb_x = imagesx($i)*($dest_y/imagesy($i)); 
+	$thumb_y = $dest_y; 
+	} 
+	} else { 
+	//Using the original dimensions 
+	$thumb_x = imagesx($i); 
+	$thumb_y = imagesy($i); 
+	}
+	//Generate a new image at the size of the thumbnail 
+	$thumb = imagecreatetruecolor($thumb_x,$thumb_y); 
+	//Copy the original image data to it using resampling 
+	imagecopyresampled($thumb, $i ,0, 0, 0, 0, $thumb_x, $thumb_y, imagesx($i), imagesy($i)); 
+	//Save the thumbnail 
+	
+	@imagejpeg($thumb, "/media/" . $filename, 80); 
+	}
+	*/
+				$uploader = new Varien_File_Uploader('logo');
+					
+					// Any extention would work
+	           		$uploader->setAllowedExtensions(array('jpg','jpeg','gif','png'));
+					$uploader->setAllowRenameFiles(false);
+	$path = Mage::getBaseDir('media') . DS ;
+	$uploader->save($path,  $_FILES['logo']['name']);
+
+$insert=$write->query("insert into uploadlogo set title='".$_POST['title']."',contactname='".$_POST['contactname']."',companyname='".$_POST['companyname']."',filename='".$filename."',address='".$_POST['address']."',city='".$_POST['city']."',state='".$_POST['state']."',zipcode='".$_POST['zipcode']."',phone='".$_POST['phone']."',email='".$_POST['email']."',content='".$_POST['content']."',status='2',created_time=now(),update_time=now()");
+	//header("Status: 301"); 
+	//header('Location: '. Mage::getUrl('upload-logo', array('mode' => 'add')));
+	header('Location:http://www.theembroideryshoppe.com/upload-logo?mode=add');
+	exit;
+}
+ ?>
+ <script>
+ function check()
+ {
+ 	if(document.getElementById('contactname').value=='')
+		{
+			alert('Contact name field can not be empty');
+			return false;
+		}
+	if(document.getElementById('logo').value=='')
+		{
+			alert('Please select logo to upload');
+			return false;
+		}
+		var re_text = /\.jpg|\.jpeg|\.pjpeg|\.png|\.gif/i;
+
+	var filename = document.getElementById('logo').value;
+//	alert(filename.search(re_text));
+	/* Checking file type */
+	if (filename.search(re_text) == -1 && filename != '')
+	{
+	alert("File does not have .jpg/.jpeg/.gif/.pjpeg/.png extension");
+	document.getElementById('logo').value="";
+	//upload_field.form.reset();
+	return false;
+	}	
+	if(document.getElementById('companyname').value=='')
+		{
+			alert('Company name field can not be empty');
+			return false;
+		}
+		
+	if(document.getElementById('content').value=='')
+		{
+			alert('Comment field can not be empty');
+			return false;
+		}	
+	/*if(document.getElementById('security_code').value!=<?php //echo $_SESSION['securityCode']; ?>)	
+		{
+			alert('Security code entered was wrong');
+			return false;
+		}	*/	
+ 	return true;
+ }
+ </script>
+<table width="100%" border="0" cellspacing="10" cellpadding="7">
+        <form name="f1" method="post" action="http://www.theembroideryshoppe.com/index.php/upload-logo" enctype="multipart/form-data" onSubmit="return check()" >
+          <tr> 
+            <td colspan="2" align="center"></td>
+          </tr>
+          
+          
+          <tr> 
+            <td colspan="2" align="center"><strong>Upload Logo</strong></td>
+          </tr>
+		  <?php
+		  if(isset($_GET['mode']) && ($_GET['mode']=='add'))
+		  	{
+			?>
+			<tr><td colspan="2" align="center">
+			<font color="#FF0000">Logo is uploaded successfully	</font> 
+			</td></tr> 
+		  <?php 
+		  }
+		  ?>
+		  <tr> 
+            <td width="19%" align="right">Logo Image File Name</td>
+            <td width="81%"><input name="title" type="text" id="title" required=1 title="Logo name"></td>
+          </tr>
+          <tr> 
+            <td width="19%" align="right">Contact Name<span class="style1">*</span></td>
+            <td width="81%"><input name="contactname" type="text" id="contactname" required=1 title="Contact Name"></td>
+          </tr>
+          <tr> 
+            <td align="right">Logo Image<span class="style1">*</span></td>
+            <td><input name="logo" type="file" class="buttonstyle1" id="logo">
+              <font color="#FF0000">*(image type will be jpg,gif,jpeg,png and &nbsp; minimum size 100 * 100)</font></td>
+          </tr>
+          <tr> 
+            <td align="right">Company Name<span class="style1">*</span></td>
+            <td><input name="companyname" type="text" id="companyname" required=1 title="Company Name"></td>
+          </tr>
+          <tr> 
+            <td align="right">Address</td>
+            <td><input name="address" type="text" id="address" required=1 title="Address "></td>
+          </tr>
+          <tr> 
+            <td align="right">City</td>
+            <td><input name="city" type="text" id="city" required=1 title="City"></td>
+          </tr>
+          <tr> 
+            <td align="right">State</td>
+            <td><select name="state"   title="state">
+                <option value="0" selected>Select State</option>
+                <option value="Alabama">Alabama </option>
+                <option value="Alaska">Alaska </option>
+                <option value="Arizona">Arizona </option>
+                <option value="Arkansas">Arkansas </option>
+                <option value="CA">California </option>
+                <option value="Colorado">Colorado </option>
+                <option value="Connecticut">Connecticut </option>
+                <option value="Delaware">Delaware </option>
+                <option value="Florida">Florida </option>
+                <option value="Georgia">Georgia </option>
+                <option value="Hawaii">Hawaii </option>
+                <option value="Idaho">Idaho </option>
+                <option value="Illinois">Illinois </option>
+                <option value="Indiana">Indiana </option>
+                <option value="Iowa">Iowa </option>
+                <option value="Kansas">Kansas </option>
+                <option value="Kentucky ">Kentucky </option>
+                <option value="Louisiana">Louisiana </option>
+                <option value="Maine">Maine </option>
+                <option value="Maryland">Maryland </option>
+                <option value="Massachusetts">Massachusetts </option>
+                <option value="Michigan">Michigan </option>
+                <option value="Minnesota">Minnesota </option>
+                <option value="Mississippi">Mississippi </option>
+                <option value="Missouri">Missouri </option>
+                <option value="Montana">Montana </option>
+                <option value="Nebraska">Nebraska </option>
+                <option value="Nevada ">Nevada </option>
+                <option value="New Hampshire">New Hampshire</option>
+                <option value="New Jersey">New Jersey</option>
+                <option value="New Mexico">New Mexico </option>
+                <option value="New York">New York</option>
+                <option value="North Carolina">North Carolina</option>
+                <option value="North Dakota">North Dakota</option>
+                <option value="Ohio">Ohio </option>
+                <option value="Oklahoma">Oklahoma</option>
+                <option value="Oregon">Oregon</option>
+                <option value="Pennsylvania">Pennsylvania </option>
+                <option value="Rhode Island">Rhode Island </option>
+                <option value="South Carolina">South Carolina </option>
+                <option value="South Dakota">South Dakota</option>
+                <option value="Tennessee">Tennessee </option>
+                <option value="Texas">Texas </option>
+                <option value="Utah">Utah</option>
+                <option value="Vermont">Vermont</option>
+                <option value="Virginia">Virginia </option>
+                <option value="Washington">Washington</option>
+                <option value="Washington,D.C.">Washington,D.C.</option>
+                <option value="West Virginia">West Virginia</option>
+                <option value="Wisconsin">Wisconsin</option>
+                <option value="Wyoming">Wyoming </option>
+              </select></td>
+          </tr>
+          <tr> 
+            <td align="right">Zip Code</td>
+            <td><input name="zipcode" type="text" id="zipcode" required=2 title="Zip Code"></td>
+          </tr>
+          <tr> 
+            <td align="right">Phone </td>
+            <td><input name="phone" type="text" id="phone" required="5" title="Phone Number"></td>
+          </tr>
+          <tr> 
+            <td align="right">E- Mail</td>
+            <td><input name="email" type="text" id="email" required=4 title="E-mail"></td>
+          </tr>
+          <tr> 
+            <td align="right">Comments<span class="style1">*</span></td>
+            <td><textarea name="content" cols="50" rows="10" id="content"></textarea></td>
+          </tr>
+      <!--    <tr>
+            <td height="26" align="right"><span class="label">Security Word</span></td>
+            <td><img src="<?php //echo str_replace('index.php/','',Mage::getBaseUrl());   ?>CaptchaSecurityImages.php" /></td>
+          </tr>-->
+         <!-- <tr>
+            <td height="26" align="left">Type in the word exactly as you see it above</td>
+            <td><input style="width:261px; height:20px;" name="security_code" type="text" class="inp" id="security_code" /> <?php //if(isset($_REQUEST['errmsg'])){ ?><font color="#FF0000">* <?php //echo "please Enter Correct Word"; }?></font></td>
+          </tr>-->
+         
+          <tr> 
+            <td height="26">   </td>
+            <td><input name="Submit2" type="submit" class="buttonstyle1" value="Submit"></td>
+          </tr>
+		   <tr>
+		     <td height="26">&nbsp;</td>
+		     <td><span class="style1">*Note:<br>
+	          All product pricing includes your direct embroidered logo.<br>
+	         A small set up charge may apply New customer logos.<br />
+			 Upload your jpeg logo file will appear on the site within 24 hours
+			 </span></td>
+	      </tr>
+  </form>
+ </table>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Videogallery_Videogallery>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Videogallery_Videogallery>
+    </modules>
+</config> 
