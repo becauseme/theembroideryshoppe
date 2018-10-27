@@ -232,6 +232,7 @@ class Mage_Checkout_CartController extends Mage_Core_Controller_Front_Action
 		 $selectlogo= $this->getRequest()->getParam('select_logo');
          $nameselectinfo= $this->getRequest()->getParam('nametextOpt');
          $phoneselectinfo= $this->getRequest()->getParam('phonetextOpt');
+         $emailselectinfo= $this->getRequest()->getParam('emailtextOpt');
 	
 		//echo "<pre>";
 		
@@ -284,8 +285,8 @@ class Mage_Checkout_CartController extends Mage_Core_Controller_Front_Action
 					foreach($sizeop as $optval=>$optqty){
 					if($optqty!=''){
 						$product= $this->_initProduct();
-					echo "$key=>option value".$optval;
-					echo "option qty".$optqty;
+					//echo "$key=>option value".$optval;
+					//echo "option qty".$optqty;
 	$params = array(
         'product' => $product->getId(),
         'qty' => $optqty,
@@ -302,6 +303,10 @@ class Mage_Checkout_CartController extends Mage_Core_Controller_Front_Action
         if(isset($params1['phonetextOpt'])){
           $customPhoneInfo=$params1['phonetextOpt'];
           $params['additional_options']['customPhone']=$customPhoneInfo;
+        }
+        if(isset($params1['emailtextOpt'])){
+          $customEmailInfo=$params1['emailtextOpt'];
+          $params['additional_options']['customEmail']=$customEmailInfo;
         }
 	
 	foreach($params1['options'] as $optcolkey=>$optcolval)
