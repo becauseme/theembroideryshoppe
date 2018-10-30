@@ -84,24 +84,26 @@ $readresult2=$write->query("select select_logo from sales_flat_quote_item where 
 //echo "<pre>";
 
 $orderitem=$_item->getProductOptionByCode('info_buyRequest');
+//echo "<pre>";
 //print_r($orderitem);
+//echo $orderitem['additional_options']['customName'];
 //echo $orderitem['customName'];
 
-foreach($orderitem as $moreoption){
+
 //$orderitem=$_item->getProductOptionByCode('info_buyRequest');
 //print_r($moreoption);
-if (isset($moreoption['customName']) && is_string($moreoption['customName'])) {
-                    echo "<strong>Name: </strong>" .$moreoption['customName']. "<br>";
+if (isset($orderitem['additional_options']['customName']) && is_string($orderitem['additional_options']['customName'])) {
+                    echo "<strong>Special Instructions Comment: </strong>" .$this->htmlEscape($orderitem['additional_options']['customName']). "<br>";
                 }
-if (isset($moreoption['customPhone']) && is_string($moreoption['customPhone'])) {
+/*if (isset($moreoption['customPhone']) && is_string($moreoption['customPhone'])) {
     echo "<strong>Phone: </strong>".$moreoption['customPhone'];
 }
 if (isset($moreoption['customEmail']) && is_string($moreoption['customEmail'])) {
     echo "<strong>Email: </strong>".$moreoption['customEmail'];
-}
+}*/
 //echo $moreoption->customName;
    // echo $moreoption['additional_options'];
-}
+
 ?>
 	
     <?php echo $_item->getDescription() ?>

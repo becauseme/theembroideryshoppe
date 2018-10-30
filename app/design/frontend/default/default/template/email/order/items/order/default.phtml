@@ -54,6 +54,29 @@ $readresult2=$write->query("select select_logo from sales_flat_quote_item where 
 <dd style="margin:0; padding:0 0 0 9px;"><?php	 echo $row2['select_logo'];	?></dd>
 
 </dl><?php } ?>
+<?php 
+//echo "<pre>";
+
+$orderitem=$_item->getProductOptionByCode('info_buyRequest');
+//print_r($orderitem);
+//echo $orderitem['customName'];
+
+
+//$orderitem=$_item->getProductOptionByCode('info_buyRequest');
+//print_r($moreoption);
+if (isset($orderitem['additional_options']['customName']) && is_string($orderitem['additional_options']['customName'])) {
+                    echo "<strong>Special Instructions Comment: </strong>" .$this->htmlEscape($orderitem['additional_options']['customName']). "<br>";
+                }
+/*if (isset($moreoption['customPhone']) && is_string($moreoption['customPhone'])) {
+    echo "<strong>Phone: </strong>".$moreoption['customPhone'];
+}
+if (isset($moreoption['customEmail']) && is_string($moreoption['customEmail'])) {
+    echo "<strong>Email: </strong>".$moreoption['customEmail'];
+}*/
+//echo $moreoption->customName;
+   // echo $moreoption['additional_options'];
+
+?>
         <?php echo $_item->getDescription() ?>
         <?php if ($_item->getGiftMessageId() && $_giftMessage = $this->helper('giftmessage/message')->getGiftMessage($_item->getGiftMessageId())): ?>
         <br/><strong><?php echo $this->__('Gift Message') ?></strong>
