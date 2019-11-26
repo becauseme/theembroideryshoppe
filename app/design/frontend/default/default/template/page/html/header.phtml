@@ -204,14 +204,45 @@ $ss= mysql_query("select * from banner");
 
 $ssData = mysql_fetch_array($ss); ?>
 
-    <div class="left-col"><img src="<?php echo $this->getSkinUrl('images/leftbannere.png') ?>" /></div>
+    <div class="left-col">
+
+    	<!-- <img src="<?php echo $this->getSkinUrl('images/leftbannere.png') ?>" /> -->
+    	<div class="flexslider_wrap">
+        <div class="flexslider">
+          <ul class="slides">
+            <?php $homeBannerQuery= mysql_query("select * from bannerhome order by bannerhome_id asc");
+
+			while($row1 = mysql_fetch_array($homeBannerQuery)) {  ?>
+
+	            <li>
+	              <a href="<?php echo $row1['title']; ?>" target="_blank" ><img src="<?php echo Mage::getBaseUrl();?>media/<?php echo $row1['filename']; ?>" alt="<?php echo $row1['bannerhome_id']; ?>"/></a>
+	            </li>
+        	<?php }?>
+           <!--  <li>
+              <a href="http://www.promoplace.com/teshoppe/" target="_blank" > <img src="assets/images/2.png" alt="2"></a>
+            </li>
+            <li>
+               <a href="http://www.promoplace.com/teshoppe/" target="_blank" ><img src="assets/images/2.png" alt="2"></a>
+            </li>
+            <li>
+               <a href="http://www.promoplace.com/teshoppe/" target="_blank" ><img src="assets/images/4.png" alt="4"></a>
+            </li>
+            <li>
+               <a href="http://www.promoplace.com/teshoppe/" target="_blank" ><img src="assets/images/5.png" alt="5"></a>
+            </li>  -->           
+          </ul>
+        </div>        
+      
+</div>
+    		
+    </div>
 
     <div class="right-col"><!--<a href="<?php //echo $this->getUrl('sale.html')?>">
     
     <img src="<?php //echo $this->getSkinUrl('images/fall-banner.png') ?>" />
     
     </a>-->
-    <a href="https://www.theembroideryshoppe.com/index.php/sale-1.html"><img src="https://www.theembroideryshoppe.com/media/<?php echo $ssData['filename']; ?>" /></a>
+    <a href="<?php echo $ssData['title']; ?>"><img src="https://www.theembroideryshoppe.com/media/<?php echo $ssData['filename']; ?>" /></a>
     
    <?php /*?> <a href="<?php echo $ssData['title'];  ?>"><img src="http://www.theembroideryshoppe.com/media/<?php echo $ssData['filename']; ?>" /></a><?php */?>
    

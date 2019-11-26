@@ -70,11 +70,11 @@
 //echo "This is for Custom option for newly added custom_info attribute";
 
   $_product = $this->getProduct();
-    $attribute = $_product->getResource()->getAttribute('custom_info');
+    $attribute = $_product->getResource()->getAttribute('custom_textarea_for_logo');
     //echo "<pre>";
     //print_r($attribute);
     $attribute_value = $attribute ->getFrontend()->getValue($_product);
-    if ($attribute_value == 'Yes') {?>
+    if ($attribute_value == 'No') { }else{?>
     	<div class="logoclass">	
 			<table><tr ><td colspan="2">
 			    <h3 class="bx_title">Require additional Customization?<br>

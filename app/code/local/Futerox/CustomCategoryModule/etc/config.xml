@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config>
+<modules>
+<Futerox_CustomCategoryModule>
+	<version>0.1.0</version>
+	</Futerox_CustomCategoryModule>
+</modules>
+<!--<global>
+
+
+
+		 <resources>
+			<new_attribute_csv_setup>
+			  <setup>
+				<module>Futerox_CustomCategoryModule</module>
+				<class>Futerox_CustomCategoryModule_Mysql4_Setup</class>
+			  </setup>
+			  <connection>
+				<use>core_setup</use>
+			  </connection>
+			</new_attribute_setup>
+			<new_attribute_setup_write>
+			  <connection>
+				<use>core_write</use>
+			  </connection>
+			</new_attribute_setup_write>
+			<new_attribute_setup_read>
+			  <connection>
+				<use>core_read</use>
+			  </connection>
+			</new_attribute_setup_read>
+		</resources> 
+</global>-->
+</config>

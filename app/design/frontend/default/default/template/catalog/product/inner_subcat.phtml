@@ -13,6 +13,8 @@ $path=str_replace('/index.php/','',$pp);
  <?php if($k==0) { echo '<div style="width: 700px; float:left; ">'; }  ?>
  <?php $k++;  ?>
     <div style="width:230px; float:left; text-align:center">
+     
+<?php if(!empty($_childCategory->image)){?>
       <a href="<?php echo $_childCategory->getUrl();?>">
 	  <?php
 	  list($width, $height, $type, $attr) = getimagesize('media/catalog/category/'.$_childCategory->image);
@@ -29,6 +31,7 @@ if($height > '110')
 	
 	   
 	  </a>
+<?php }?>
         <p style="padding:8px 0 7px 0;" align="center"><a href="<?php echo $_childCategory->getUrl();?> "> <?php echo $_childCategory->getName(); ?></a></p>
 </div>
      <?php if($k==3) { echo "</div>"; $k=0; }  ?>

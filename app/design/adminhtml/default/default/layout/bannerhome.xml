@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <bannerhome_adminhtml_bannerhome_index>
+        <reference name="content">
+            <block type="bannerhome/adminhtml_bannerhome" name="bannerhome" />
+        </reference>
+    </bannerhome_adminhtml_bannerhome_index>
+</layout>

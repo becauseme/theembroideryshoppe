@@ -765,3 +765,7 @@ clear:left;
 	padding:0px !important; 
 	padding-left:0px !important;
 }
+
+.availability {
+  display: none;
+}

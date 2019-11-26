@@ -49,11 +49,22 @@ urchinTracker();
 	  <p style="float:left; width:100%; ">
 	 Copyright &copy; 2003 theembroideryshoppe.com. All rights reserved.
 <br />
-Website Designed by <a href="http://www.futerox.com" target="_blank" >Futerox Interactive</a>
+
 
 	   <?php //echo $this->getCopyright() ?>
-	
-	
+     <link rel="stylesheet" href="<?php echo Mage::getBaseUrl();?>flexslider/flexslider.css" />
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+   
+	 
+  <script defer src="<?php echo Mage::getBaseUrl();?>flexslider/jquery.flexslider-min.js"></script>
+  <script type="text/javascript">
+   $.noConflict();
+
+jQuery(window).load(function () {
+    jQuery('.flexslider').flexslider();
+});
+
+   </script>
      
     </td>
   </tr>
